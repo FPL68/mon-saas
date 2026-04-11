@@ -7,8 +7,8 @@ function App() {
   const [message, setMessage] = useState("");
 
   const register = async () => {
-    try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", {
+    try {const res = await axios.post("https://backend-vwot.onrender.com/api/auth/register", {
+  
         email, 
         password,
       });
