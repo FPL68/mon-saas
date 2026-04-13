@@ -44,7 +44,7 @@ function App() {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <input
+     <input
   type="password"
   placeholder="Password"
   onChange={(e) => setPassword(e.target.value)}
