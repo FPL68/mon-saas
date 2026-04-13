@@ -48,8 +48,6 @@ function App() {
         type="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
-      
-
       <button onClick={register}>
         Créer un compte
       </button>
