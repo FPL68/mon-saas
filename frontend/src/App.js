@@ -1,48 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
+return (
+  <div className="container">
+    <h1>Mon SaaS 🚀</h1>
 
-function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+    <input
+      placeholder="Email"
+      onChange={(e) => setEmail(e.target.value)}
+    />
 
-  const register = async () => {
-    try {const res = await axios.post("https://backend-vwot.onrender.com/api/auth/register", {
-  
-        email, 
-        password,
-      });
-      setMessage(res.data.message);
-    } catch (err) {
-      setMessage("Erreur serveur");
-    }
-  };
+    <input
+      type="password"
+      placeholder="Password"
+      onChange={(e) => setPassword(e.target.value)}
+    />
 
-  return (
-    return (
-  <div className="container"> </div>);
-    <div style={{ padding: 50 }}>
-      <h1>Mon SaaS 🚀</h1>
+    <button onClick={register}>
+      Créer un compte
+    </button>
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br /><br />
-
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br /><br />
-
-      <button onClick={register}>Créer un compte</button>
-
-      <p>{message}</p>
-    </div>
-  );
-}
-
-export default App;
-console.log("test");
+    <p>{message}</p>
+  </div>
+);
