@@ -7,6 +7,20 @@ function App() {
   const [message, setMessage] = useState("");
 
   const register = async () => {
+    const login = async () => {
+  try {
+    const res = await axios.post(
+      "https://backend-vwot.onrender.com/api/auth/login",
+      {
+        email,
+        password,
+      }
+    );
+    setMessage("Connecté !");
+  } catch (err) {
+    setMessage("Erreur login");
+  }
+};
     try {
       const res = await axios.post(
         "https://backend-vwot.onrender.com/api/auth/register",
@@ -39,7 +53,9 @@ function App() {
       <button onClick={register}>
         Créer un compte
       </button>
-
+<button onClick={login}>
+  Se connecter
+</button>
       <p>{message}</p>
     </div>
   );
