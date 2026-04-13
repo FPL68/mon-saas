@@ -7,31 +7,26 @@ function App() {
   const [message, setMessage] = useState("");
 
   const register = async () => {
-    const login = async () => {
-  try {
-    const res = await axios.post(
-      "https://backend-vwot.onrender.com/api/auth/login",
-      {
-        email,
-        password,
-      }
-    );
-    setMessage("Connecté !");
-  } catch (err) {
-    setMessage("Erreur login");
-  }
-};
     try {
       const res = await axios.post(
         "https://backend-vwot.onrender.com/api/auth/register",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
       setMessage(res.data.message);
-    } catch (err) {
-      setMessage("Erreur");
+    } catch {
+      setMessage("Erreur register");
+    }
+  };
+
+  const login = async () => {
+    try {
+      await axios.post(
+        "https://backend-vwot.onrender.com/api/auth/login",
+        { email, password }
+      );
+      setMessage("Connecté !");
+    } catch {
+      setMessage("Erreur login");
     }
   };
 
@@ -44,13 +39,20 @@ function App() {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-     <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
       <button onClick={register}>
         Créer un compte
       </button>
-<button onClick={login}>
-  Se connecter
-</button>
+
+      <button onClick={login}>
+        Se connecter
+      </button>
+
       <p>{message}</p>
     </div>
   );
