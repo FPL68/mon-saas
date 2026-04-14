@@ -16,8 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-const stripe =new
-Stripe("sk_test_123")
+const stripe = new Stripe("sk_test_123");
 const openai = new OpenAI({ apiKey: "test" });
 
 // Fake DB
