@@ -24,37 +24,27 @@ const openai = new OpenAI({ apiKey: "test" });
 let users = [];
 
 // REGISTER
-app.post("/api/auth/register", async (req, res) => {
-    const { email, password } = req.body;
-
-    const hashed = await bcrypt.hash(password, 10);
-
-    const user = {
-        id: Date.now(),
-        email,
-        password: hashed
-    };
-
-    users.push(user);
-
-    res.json({ message: "User created" });
-});
-
-// LOGIN
 app.post("/api/auth/login", async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    const user = users.find(u => u.email === email);
+  const user = users.find(u => u.email === email);
 
-    if (!user) return res.status(404).json({ error: "User not found" });
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
 
-    const valid = await bcrypt.compare(password, user.password);
+  if (user.password !== password) {
+    return res.status(400).json({ message: "Wrong password" });
+  }
 
-    if (!valid) return res.status(401).json({ error: "Wrong password" });
+  // 👉 TOKEN FAKE (simple pour commencer)
+  const token = "token_" + email;
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-
-    res.json({ token });
+  res.json({
+    message: "Login success",
+    token,
+    email
+  });
 });
 
 // TEST
