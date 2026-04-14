@@ -32,32 +32,47 @@ function App() {
     }
   };
 
-  return (
-    <div className="container">
-      <h1>Mon SaaS 🚀</h1>
+return (
+  <div className="container">
+    <h1>Mon SaaS 🚀</h1>
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    {isLogged ? (
+      <>
+        <h2>Bienvenue {localStorage.getItem("email")} 👋</h2>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <button onClick={() => {
+          localStorage.clear();
+          setIsLogged(false);
+        }}>
+          Se déconnecter
+        </button>
+      </>
+    ) : (
+      <>
+        <input
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <button onClick={register}>
-        Créer un compte
-      </button>
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <button onClick={login}>
-        Se connecter
-      </button>
+        <button onClick={register}>
+          Créer un compte
+        </button>
 
-      <p>{message}</p>
-    </div>
-  );
+        <button onClick={login}>
+          Se connecter
+        </button>
+      </>
+    )}
+
+    <p>{message}</p>
+  </div>
+);
 }
 
 export default App;
