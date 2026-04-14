@@ -46,7 +46,19 @@ app.post("/api/auth/login", async (req, res) => {
     email
   });
 });
+app.post("/api/auth/register", (req, res) => {
+  const { email, password } = req.body;
 
+  const existingUser = users.find(u => u.email === email);
+
+  if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  users.push({ email, password });
+
+  res.json({ message: "User created" });
+});
 // TEST
 app.get("/", (req, res) => {
     res.send("API running 🚀");
