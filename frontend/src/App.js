@@ -20,7 +20,22 @@ function App() {
     }
   };
 
-  const login = async () => {
+ const login = async () => {
+  try {
+    const res = await axios.post(
+      "https://backend-vwot.onrender.com/api/auth/login",
+      { email, password }
+    );
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("email", res.data.email);
+
+    setIsLogged(true);
+    setMessage("Connecté !");
+  } catch {
+    setMessage("Erreur login");
+  }
+};
     try {
       await axios.post(
         "https://backend-vwot.onrender.com/api/auth/login",
