@@ -20,15 +20,12 @@ function App() {
     }
   };
 
- const login = async () => {
+const login = async () => {
   try {
     const res = await axios.post(
       "https://backend-vwot.onrender.com/api/auth/login",
       { email, password }
     );
-
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("email", res.data.email);
 
     setIsLogged(true);
     setMessage("Connecté !");
@@ -36,6 +33,7 @@ function App() {
     setMessage("Erreur login");
   }
 };
+
     try {
       await axios.post(
         "https://backend-vwot.onrender.com/api/auth/login",
@@ -88,6 +86,5 @@ return (
     <p>{message}</p>
   </div>
 );
-}
 
 export default App;
