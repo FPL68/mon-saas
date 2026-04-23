@@ -19,13 +19,18 @@ function App() {
       setMessage("Erreur register");
     }
   };
-
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) setIsLogged(true);
+}, []);
 const login = async () => {
   try {
     const res = await axios.post(
       "https://backend-vwot.onrender.com/api/auth/login",
       { email, password }
     );
+
+    localStorage.setItem("token", res.data.token);
 
     setIsLogged(true);
     setMessage("Connecté !");
